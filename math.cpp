@@ -14,6 +14,7 @@ int main(){
     for(int i=0;i<87650;i++)
         println(i);
 
-    TimeSpec::print_cost_time();
+    TimeSpec::print_cost_ticks();
+    TimeSpec::print_cost_seconds();
     return 0;
 }

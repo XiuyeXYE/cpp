@@ -8,33 +8,46 @@ namespace xiuye{
         private:
             static clock_t start;
             static clock_t end;
-        private:
-            static clock_t cost_time();
+//        private:
+            
         public:
-            static void begin();
+            static clock_t begin();
             static clock_t to_end();
-            static void print_cost_time();
+            static clock_t ticks();
+            static double seconds();
+            static void print_cost_ticks();
+            static void print_cost_seconds();
     };
 
 
     clock_t TimeSpec::start = 0;
     clock_t TimeSpec::end = 0;
-    void TimeSpec::begin(){
+    clock_t TimeSpec::begin(){
         start = clock();
-        
+        return start;
     }
     clock_t TimeSpec::to_end(){
         end = clock();
-        return cost_time();
+        return end;
     }
-    clock_t TimeSpec::cost_time(){
+    clock_t TimeSpec::ticks(){
         //println(end - start,CLOCKS_PER_SEC);
         //return double(end - start)/CLOCKS_PER_SEC;
+        to_end();
         return end - start;
     }
 
-    void TimeSpec::print_cost_time(){
-        println("From beginning (", start ,") to end (",end,") totally costs: ",to_end()," ticks");
+    double TimeSpec::seconds(){
+        return double(ticks())/CLOCKS_PER_SEC;
+    }
+
+
+    void TimeSpec::print_cost_ticks(){
+        println("From beginning (", start ,") to end (",end,") totally costs: ",ticks()," ticks");
+    }
+
+    void TimeSpec::print_cost_seconds(){
+        println("From beginning (", double(start)/CLOCKS_PER_SEC ,") to end (",double(end)/CLOCKS_PER_SEC,") totally costs: ",seconds()," s");
     }
 
 
