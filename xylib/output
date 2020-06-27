@@ -1,0 +1,30 @@
+#ifndef __XY_LIB_OUTPUT
+#define __XY_LIB_OUTPUT
+#include<iostream>
+namespace xiuye{
+
+    void println(){
+        std::cout << std::endl;
+    }
+
+    template<class T,class...Args>
+    void println(T t,Args...args){
+        std::cout << t;
+        println(args...);
+    } 
+
+    template<class T>
+    void print(T t){
+        std::cout << t;
+    }
+
+    template<class T,class...Args>
+    void print(T t,Args...args){
+        std::cout << t;
+        print(args...);
+    }
+
+
+}
+
+#endif

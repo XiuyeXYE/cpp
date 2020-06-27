@@ -1,0 +1,23 @@
+#ifndef __XY_LIB_MATH
+#define __XY_LIB_MATH
+
+namespace xiuye{
+    template<class T>
+    T max(T a,T b){
+        return a>b?a:b;
+    }
+    template<class T,class...Args>
+    T max(T t,Args...args){
+        return max(t,max(args...));
+    }
+    template<class T>
+    T min(T a,T b){
+        return a>b?b:a;
+    }
+    template<class T,class...Args>
+    T min(T t,Args...args){
+        return min(t,min(args...));
+    }
+}
+
+#endif
