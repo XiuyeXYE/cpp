@@ -1,0 +1,43 @@
+#ifndef __XY_LIB_TIMESPEC_H_
+#define __XY_LIB_TIMESPEC_H_
+#include<ctime>
+
+namespace xiuye{
+
+    class TimeSpec{
+        private:
+            static clock_t start;
+            static clock_t end;
+        private:
+            static clock_t cost_time();
+        public:
+            static void begin();
+            static clock_t to_end();
+            static void print_cost_time();
+    };
+
+
+    clock_t TimeSpec::start = 0;
+    clock_t TimeSpec::end = 0;
+    void TimeSpec::begin(){
+        start = clock();
+        
+    }
+    clock_t TimeSpec::to_end(){
+        end = clock();
+        return cost_time();
+    }
+    clock_t TimeSpec::cost_time(){
+        //println(end - start,CLOCKS_PER_SEC);
+        //return double(end - start)/CLOCKS_PER_SEC;
+        return end - start;
+    }
+
+    void TimeSpec::print_cost_time(){
+        println("From beginning (", start ,") to end (",end,") totally costs: ",to_end()," ticks");
+    }
+
+
+}
+
+#endif
