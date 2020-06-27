@@ -30,9 +30,12 @@ struct IsTrue<true>{
     };
 };
 
+#define isTrue(...) IsTrue<__VA_ARGS__>::value
+
 template<class T,class U>
 struct IsConvertable{
     private:
+    //you can use "using aliasType = type"!
         typedef char YES;
         typedef struct {
             char none[2];
@@ -45,6 +48,7 @@ struct IsConvertable{
         typedef IsTrue<sizeof(test(self()))==sizeof(YES)> Result;
 };
 
+#define isConvertable(...) IsConvertable<__VA_ARGS__>::Result::value
 
 struct A{
     int a;
@@ -60,10 +64,15 @@ int main(){
     println(isEQ(float,float));
 
     println(IsTrue<1==1>::value);
+    println(isTrue(1==1));
     println(IsConvertable<int,bool>::Result::value);
     println(IsConvertable<int,int>::Result::value);
     println(IsConvertable<char,bool>::Result::value);
     println(IsConvertable<char,A>::Result::value);
+    println(isConvertable(char,A));
+    println(isConvertable(char,int));
+
+
 
     return 0;
 }
