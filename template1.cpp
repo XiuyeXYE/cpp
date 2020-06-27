@@ -62,6 +62,11 @@ struct A{
     double c;
 };
 
+enum class Color{
+	RED,
+	GREEN,
+	BLUE
+};
 int main(){
 
     println(isEqual<int,float>::value);
@@ -91,6 +96,10 @@ int main(){
     println(len(a));
     println(len(b));
     println(len(b[0]));
-
+    std::cout << (int)Color::RED << std::endl;
+  
+    println((int)Color::RED);
+	
+	
     return 0;
 }
