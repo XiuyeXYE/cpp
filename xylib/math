@@ -18,6 +18,13 @@ namespace xiuye{
     T min(T t,Args...args){
         return min(t,min(args...));
     }
+
+    template<class T,int N>
+    int len(T(&)[N]){
+        return N;
+    }
+
+    
 }
 
 #endif

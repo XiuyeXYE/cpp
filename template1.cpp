@@ -50,6 +50,12 @@ struct IsConvertable{
 
 #define isConvertable(...) IsConvertable<__VA_ARGS__>::Result::value
 
+template<class T,int N>
+int ArrayLength(T(&)[N]){
+    return N;
+}
+
+
 struct A{
     int a;
     float b;
@@ -72,7 +78,19 @@ int main(){
     println(isConvertable(char,A));
     println(isConvertable(char,int));
 
+    println(len("1234567"));
 
+    int a[10];
+
+    println(ArrayLength(a));
+    int b[100][101];
+    println(ArrayLength(b));
+    println(ArrayLength("123456789"));
+    println(len("123456789"));
+    println(len(""));
+    println(len(a));
+    println(len(b));
+    println(len(b[0]));
 
     return 0;
 }

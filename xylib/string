@@ -3,10 +3,15 @@
 
 namespace xiuye{
 
-    int len(const char*str){
-        int i = 0;
-        while(str[i++]!='\0');
-        return i-1;//len -1;
+    //int len(const char*str){
+    //   int i = 0;
+    //    while(str[i++]!='\0');
+    //    return i-1;//len -1;
+    //}
+
+    template<int N>
+    int len(const char (&)[N]){
+        return N-1;
     }
 
 }
