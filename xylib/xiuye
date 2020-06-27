@@ -1,0 +1,9 @@
+#ifndef __XY_LIB
+#define __XY_LIB
+
+#include"output"
+#include"math"
+#include"string"
+#include"time"
+
+#endif

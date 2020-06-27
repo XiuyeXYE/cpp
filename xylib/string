@@ -1,0 +1,15 @@
+#ifndef __XY_LIB_STR
+#define __XY_LIB_STR
+
+namespace xiuye{
+
+    int len(const char*str){
+        int i = 0;
+        while(str[i++]!='\0');
+        return i-1;//len -1;
+    }
+
+}
+
+
+#endif
