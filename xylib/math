@@ -19,11 +19,7 @@ namespace xiuye{
         return min(t,min(args...));
     }
 
-    template<class T,int N>
-    int len(T(&)[N]){
-        return N;
-    }
-
+    
     
 }
 

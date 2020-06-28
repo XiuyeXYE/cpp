@@ -1,0 +1,12 @@
+#ifndef __XY_LIB_ARRAY
+#define __XY_LIB_ARRAY
+
+namespace xiuye{
+    template<class T,int N>
+    int len(T(&)[N]){
+        return N;
+    }
+}
+
+
+#endif
