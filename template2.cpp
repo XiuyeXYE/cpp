@@ -4,6 +4,7 @@ using namespace xiuye;
 
 int main(){
 
+    println("HelloWorld");
     
     return 0;
 }
