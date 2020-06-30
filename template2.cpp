@@ -35,6 +35,11 @@ class A{
 
 };
 
+A f(){
+    A a;
+    return a;
+}
+
 int main(){
 
     println("HelloWorld");
@@ -52,7 +57,12 @@ int main(){
     A g(static_cast<A&&>(a));
     A h(std::move(a));
     // A h(std::forward(a));
-
+    println("next");
+    A i = f();
+    A &&j = f();
+    auto &&k = f();
+    // println(i);
+    
 
     return 0;
 }
