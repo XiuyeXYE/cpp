@@ -2,14 +2,15 @@
 #define __XY_LIB_OUTPUT
 #include<iostream>
 namespace xiuye{
-
+    char println_sepetator = ' ';
+    char print_sepetator = ' ';
     void println(){
         std::cout << std::endl;
     }
 
     template<class T,class...Args>
     void println(T t,Args...args){
-        std::cout << t;
+        std::cout << t << println_sepetator;
         println(args...);
     } 
 
@@ -20,7 +21,7 @@ namespace xiuye{
 
     template<class T,class...Args>
     void print(T t,Args...args){
-        std::cout << t;
+        std::cout << t << print_sepetator;
         print(args...);
     }
 
