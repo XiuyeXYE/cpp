@@ -21,7 +21,7 @@ int main(){
 
     signal(SIGCHLD,func);
 
-    println_sepetator = ';';//OK,function inner!
+    // println_sepetator = ';';//OK,function inner!
 
     if(fork()){
         println("id:",wait(nullptr));
