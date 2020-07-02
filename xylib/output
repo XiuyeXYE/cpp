@@ -1,6 +1,7 @@
 #ifndef __XY_LIB_OUTPUT
 #define __XY_LIB_OUTPUT
 #include<iostream>
+#include<string>
 namespace xiuye{
     char println_sepetator = ' ';
     char print_sepetator = ' ';
@@ -25,6 +26,31 @@ namespace xiuye{
         print(args...);
     }
 
+
+    /**
+    because of __FILE__ and __LINE__ is compiler's parameters in time!
+    */
+    #define line(...) println(std::string("[") + __FILE__+":"+std::to_string(__LINE__)+"]",__VA_ARGS__)
+
+    #define info(...) line(__VA_ARGS__)
+
+    #define log(...) line(__VA_ARGS__)
+
+    //template<class...Args>
+    //void line(Args...args){
+       
+        //std::string prefix = "[";
+        //prefix +=__FILE__;
+        //prefix+=":";
+        //prefix+=std::to_string(__LINE__);
+        //prefix+="]";
+
+      //  std::string prefix = "[";
+        //prefix = prefix + __FILE__+":"+std::to_string(__LINE__)+"]";
+        //prefix = prefix + filename +":" + std::to_string(le) + "]";
+
+        //println(prefix,args...);
+    //}
 
 }
 
