@@ -32,7 +32,7 @@ int main(){
     }
     println("test::a=",test::a);
 
-    println("println_sepetator=",println_sepetator);
+    line("println_sepetator=",println_sepetator);
 
     return 0;
 }
