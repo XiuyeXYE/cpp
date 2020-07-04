@@ -8,6 +8,9 @@ using namespace xiuye;
 #define align4(x) (((((x)-1)>>2)<<2)+4)
 #define align8(x) (((((x)-1)>>3)<<3)+8)
 
+#define ptr_size sizeof(size_t)
+#define align(x) (((((x)-1)/ptr_size)*ptr_size)+ptr_size)
+
 typedef unsigned char byte;
 
 typedef struct s_block *t_block;
@@ -15,9 +18,15 @@ typedef struct s_block *t_block;
 struct s_block{
 
     size_t size;
+    t_block prev;
     t_block next;
     int free;
+
+    void *ptr;
+
     // byte data[1];
+
+
 };
 
 #define BLOCK_SIZE sizeof(struct s_block)
@@ -26,6 +35,23 @@ struct s_block{
 // # define BLOCK_SIZE 12 /* 3*4 ... */
 
 void *base = NULL;
+
+t_block get_block(void*p){
+    // byte *tmp = (byte)p;
+    // return (p = tmp -= BLOCK_SIZE);
+
+    return (t_block)p - 1;
+
+}
+
+int valid_addr(void *p){
+    if(base){
+        if(p>base && p<sbrk(0)/*last break ptr*/){
+            return p == get_block(p)->ptr;
+        }
+    }
+    return 0;
+}
 
 t_block find_block(t_block *last,size_t size){
     t_block b = (t_block)base;
@@ -46,6 +72,9 @@ t_block extend_heap(t_block last,size_t s){
 
     b->size = s;
     b->next = NULL;
+    b->prev = last;
+    b->ptr = b+1;//block + data,so +1
+    
 
     if(last){
         last->next = b;
@@ -63,9 +92,15 @@ void split_block(t_block b,size_t s){
     t_block new_block = (t_block)(b+1+s);
     new_block->size = b->size-s-BLOCK_SIZE;
     new_block->next = b->next;
+    new_block->prev = b;
     new_block->free = 1;
+    new_block->ptr = new_block+1;
     b->size = s;
     b->next = new_block;
+    if(new_block->next){
+        new_block->next->prev = new_block;
+    }
+
 }
 
 void *malloc(size_t size){
@@ -73,12 +108,12 @@ void *malloc(size_t size){
 
     t_block b,last;
     size_t s;
-    s = align8(size);
+    s = align(size);
     if(base){
         last = (t_block)base;
         b = find_block(&last,s);
         if(b){
-            if((b->size-s) >= (BLOCK_SIZE+8)){
+            if((b->size-s) >= (BLOCK_SIZE+ptr_size)){
                 split_block(b,s);
             }
             b->free = 0;
@@ -113,16 +148,73 @@ void *malloc(size_t size){
 void *calloc(size_t number,size_t size){
 
     size_t *new_ptr;
-    size_t s8,i;
-    new_ptr = malloc(number*size);
+    size_t s,i;
+    new_ptr = (size_t*)malloc(number*size);
     if(new_ptr){
-        s8 = align8(number*size)<<3;
-        for(i=0;i<s8;i++){
+        s = align(number*size)/ptr_size;
+        for(i=0;i<s;i++){
             new_ptr[i] = 0;
         }
     }
     return new_ptr;
 
+}
+
+
+t_block fushion(t_block b){
+    if(b->next && b->next->free){
+        b->size += BLOCK_SIZE+b->next->size;
+        b->next = b->next->next;
+        if(b->next){
+            b->next->prev = b;
+        }
+    }
+    return b;
+}
+
+void free(void *p){
+    t_block b;
+    if(valid_addr(p)){
+        b = get_block(p);
+        b->free = 1;
+        if(b->prev && b->prev->free){
+            b = fushion(b->prev);
+        }
+        if(b->next){
+            fushion(b);
+        }
+        else{
+            if(b->prev){
+                b->prev->next = NULL;
+            }
+            else{
+                base = NULL;
+            }
+            brk(b);
+
+
+        }
+    }
+}
+
+void copy_block(t_block src,t_block dst){
+    size_t *sdata,*ddata;
+    size_t i;
+    sdata = (size_t*)src->ptr;
+    ddata = (size_t*)dst->ptr;
+    for(i=0;i*ptr_size<src->size && i*ptr_size<dst->size;i++){
+        ddata[i] = sdata[i];
+    }
+
+
+
+}
+
+void out_ptr_block(void *p){
+    t_block q = get_block(p);
+
+    println("block:",q,"size:",q->size,"prev:",q->prev,"next:",q->next,"free",q->free,"ptr:",q->ptr);
+    
 }
 
 
@@ -145,11 +237,37 @@ int main(){
     s_block b;
     println(sizeof(b.size),sizeof(b.next),sizeof(b.free));
     
-    int *p = (int*)malloc(sizeof(int));
+    
+    println(align(1),align(2),align(3),align(4),align(5)/8);
 
+    int *p1;
+    println(p1,p1+1,p1+2);
+
+    
+
+    char s1[1];
+    char s2[10];
+    println(sizeof(s1),sizeof(s2));
+
+    int *p = (int*)malloc(sizeof(int));
+    out_ptr_block(p);
     println(p,*p);
     *p = 100;
     println(p,*p);
+    free(p);
+    out_ptr_block(p);
+
+    int *pa = (int*)calloc(10,sizeof(int));
+    out_ptr_block(pa);
+    // for(int i=0;i<10;i++){
+    //     println(i,pa[i],sizeof(pa[i]),sizeof(pa));
+    // }
+
+    println(pa);
+
+    free(pa);
+    out_ptr_block(pa);
+
 
 
 
