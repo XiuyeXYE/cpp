@@ -56,6 +56,10 @@ int ArrayLength(T(&)[N]){
 }
 
 
+int ArrayLength(const char *s){
+    return sizeof(s);
+}
+
 struct A{
     int a;
     float b;
@@ -67,6 +71,13 @@ enum class Color{
 	GREEN,
 	BLUE
 };
+
+template<typename T>
+int ArrayLength(T &a){
+    log(sizeof(a),sizeof(a[0]));
+	return sizeof(a)/sizeof(a[0]);
+}
+
 int main(){
 
     println(isEqual<int,float>::value);
@@ -100,6 +111,9 @@ int main(){
   
     println((int)Color::RED);
 	
-	
+	const char *s1= "HelloWorld";
+    info(s1,ArrayLength(s1));//err num
+    log(123);
+
     return 0;
 }

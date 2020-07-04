@@ -64,7 +64,13 @@ int main(){
     A &&j = f();
     auto &&k = f();
     // println(i);
-    
+    const char s[]= "HelloWorld";
+    info(s,len(s));
+
+    log(len("HelloWorld"),sizeof("HelloWorld"),typeid("HelloWorld").name());
+
+    const char *s1= "HelloWorld";
+    info(s1,len(s1));
 
     return 0;
 }

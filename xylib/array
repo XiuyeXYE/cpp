@@ -6,6 +6,8 @@ namespace xiuye{
     int len(T(&)[N]){
         return N;
     }
+
+    
 }
 
 
