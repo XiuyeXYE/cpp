@@ -254,7 +254,7 @@ int main(){
     println(p,*p);
     *p = 100;
     println(p,*p);
-    free(p);
+    // free(p);
     out_ptr_block(p);
 
     int *pa = (int*)calloc(10,sizeof(int));
@@ -265,6 +265,7 @@ int main(){
 
     println(pa);
 
+    free(p);
     free(pa);
     out_ptr_block(pa);
 
