@@ -38,5 +38,8 @@ int main(){
     }
     log(p.name,p.booty,p.beard_len);
 
+
+    log(BUFSIZ,BUFSIZ/1024);
+
     return 0;
 }
