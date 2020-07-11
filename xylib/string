@@ -5,16 +5,29 @@ namespace xiuye{
 
     
 
-    template<int N>
-    int len(const char (&)[N]){
-        return N-1;
-    }
+    //template<int N>
+    //int len(const char (&)[N]){
+    //    return N-1;
+    //}
 
-    int len(const char*str){
-       int i = 0;
+    //template<int N>
+    //int len(char (&)[N]){
+    //    return N-1;
+    //}
+
+    int slen(const char*str){
+        int i = 0;
         while(str[i++]!='\0');
         return i-1;//len -1;
     }
+
+    int slen(char*str){
+        //int i = 0;
+        //while(str[i++]!='\0');
+        //log("slen exec");
+        return slen(static_cast<const char*>(str));//i-1;
+    }  
+    
 
     
 
