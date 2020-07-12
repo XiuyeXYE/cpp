@@ -18,6 +18,7 @@
 #include<aio.h>
 #include<sys/ioctl.h>
 #include<linux/fs.h>
+#include<sys/wait.h>
 
 
 
