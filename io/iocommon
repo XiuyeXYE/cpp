@@ -15,6 +15,9 @@
 #include<netdb.h>
 #include<netinet/in.h>
 #include<fcntl.h>
+#include<aio.h>
+#include<sys/ioctl.h>
+#include<linux/fs.h>
 
 
 
