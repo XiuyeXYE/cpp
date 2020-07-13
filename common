@@ -1,4 +1,4 @@
-#include"../xylib/xiuye"
+#include"xylib/xiuye"
 #include<unistd.h>
 #include<cstdio>
 #include<cstring>
@@ -25,8 +25,7 @@
 //#include<attr/xattr.h>
 #include<dirent.h>
 #include<errno.h>
-
-
+#include<linux/cdrom.h>
 
 using namespace xiuye;
 
