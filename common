@@ -26,6 +26,7 @@
 #include<dirent.h>
 #include<errno.h>
 #include<linux/cdrom.h>
+#include<inotify.h>
 
 using namespace xiuye;
 
