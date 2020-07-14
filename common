@@ -28,6 +28,7 @@
 #include<linux/cdrom.h>
 #include<sys/inotify.h>>
 #include<malloc.h>
+#include<alloca.h>
 
 using namespace xiuye;
 
