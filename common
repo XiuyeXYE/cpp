@@ -30,6 +30,8 @@
 #include<malloc.h>
 #include<alloca.h>
 #include<mysql.h>
+#include<pthread.h>
+#include<semaphore.h>
 
 
 using namespace xiuye;
