@@ -22,11 +22,12 @@
 #include<sys/wait.h>
 #include<sys/resource.h>
 #include<sched.h>
-//#include<attr/xattr.h>
+#include<sys/xattr.h>
 #include<dirent.h>
 #include<errno.h>
 #include<linux/cdrom.h>
-#include<inotify.h>
+#include<sys/inotify.h>>
+#include<malloc.h>
 
 using namespace xiuye;
 
