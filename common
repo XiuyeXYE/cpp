@@ -26,9 +26,11 @@
 #include<dirent.h>
 #include<errno.h>
 #include<linux/cdrom.h>
-#include<sys/inotify.h>>
+#include<sys/inotify.h>
 #include<malloc.h>
 #include<alloca.h>
+#include<mysql.h>
+
 
 using namespace xiuye;
 
