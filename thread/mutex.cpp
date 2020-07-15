@@ -2,6 +2,7 @@
 #include"../common"
 
 /*https://github.com/XiuyeXYE/cpp*/
+/*g++ filename.cpp -lpthread*/
 
 void *thread_function(void *arg);
 pthread_mutex_t work_mutex; /* protects both work_area and time_to_exit */

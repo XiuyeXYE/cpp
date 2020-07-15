@@ -2,6 +2,7 @@
 #include"../common"
 
 /*https://github.com/XiuyeXYE/cpp*/
+/*g++ filename.cpp -lpthread*/
 
 void *thread_function(void *arg);
 sem_t bin_sem;

@@ -2,6 +2,7 @@
 
 
 /*https://github.com/XiuyeXYE/cpp*/
+/*g++ filename.cpp -lpthread*/
 
 void *thread_func(void *arg);
 
