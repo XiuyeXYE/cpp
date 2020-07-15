@@ -32,6 +32,10 @@
 #include<mysql.h>
 #include<pthread.h>
 #include<semaphore.h>
+#include<limits.h>
+#include<sys/sem.h>
+#include<sys/shm.h>
+#include<sys/msg.h>
 
 
 using namespace xiuye;
