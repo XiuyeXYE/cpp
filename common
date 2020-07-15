@@ -36,6 +36,7 @@
 #include<sys/sem.h>
 #include<sys/shm.h>
 #include<sys/msg.h>
+#include<sys/un.h>
 
 
 using namespace xiuye;
