@@ -1,9 +1,10 @@
-#include<iostream>
-using namespace std;
+// #include<iostream>
+// using namespace std;
+#include"common"
 
 int main(){
 
-    cout << "Hello World" << endl;
+    // cout << "Hello World" << endl;
 
     enum color{
         RED,
@@ -13,7 +14,11 @@ int main(){
         PINK
     };
 
-    cout << RED << " " << PINK <<endl;
+    // cout << RED << " " << PINK <<endl;
+
+    log("Hello World");
+
+    log(RED,PINK);
 
     return 0;
 }
