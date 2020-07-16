@@ -1,10 +1,12 @@
-#include"xylib/xiuye"
-#include<unistd.h>
-#include <signal.h>
-// #include <sys/types.h>
-#include <wait.h>
+// #include"xylib/xiuye"
+// #include<unistd.h>
+// #include <signal.h>
+// // #include <sys/types.h>
+// #include <wait.h>
 
-using namespace xiuye;
+// using namespace xiuye;
+
+#include"../common"
 
 //println_sepetator = ';';//在外面无法使用命名空间内的全局变量!
 namespace test{

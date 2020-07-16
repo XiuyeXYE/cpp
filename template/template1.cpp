@@ -1,5 +1,6 @@
-#include"xylib/xiuye"
-using namespace xiuye;
+// #include"xylib/xiuye"
+// using namespace xiuye;
+#include"../common"
 
 template<class T,class U>
 struct isEqual{

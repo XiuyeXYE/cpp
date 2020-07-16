@@ -1,5 +1,8 @@
-#include"xylib/xiuye"
-using namespace xiuye;
+// #include"xylib/xiuye"
+// using namespace xiuye;
+
+#include"../common"
+
 
 unsigned int RSHash(const char *str,unsigned int len){
     unsigned int b = 378551;

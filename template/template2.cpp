@@ -1,5 +1,7 @@
-#include"xylib/xiuye"
-using namespace xiuye;
+// #include"xylib/xiuye"
+// using namespace xiuye;
+
+#include"../common"
 
 // A a; => constuctor
 // A b(a); => copy constructor

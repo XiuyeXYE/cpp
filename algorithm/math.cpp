@@ -1,7 +1,9 @@
-#include"xylib/output"
-#include"xylib/math"
-#include"xylib/time"
-using namespace xiuye;
+// #include"xylib/output"
+// #include"xylib/math"
+// #include"xylib/time"
+// using namespace xiuye;
+#include"../common"
+
 int main(){
 
     TimeSpec::begin();

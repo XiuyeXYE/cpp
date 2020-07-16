@@ -1,9 +1,12 @@
 // #include<iostream>
-#include"xylib/output"
+// #include"xylib/output"
 // #include<string>
-#include<cstring>
+// #include<cstring>
 // using namespace std;
 // using namespace xiuye;
+
+#include"../common"
+
 enum color{ //must be global!or else , println not recognize
         RED,
         GREEN
