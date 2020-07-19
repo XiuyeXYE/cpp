@@ -40,6 +40,11 @@
 //#include<sys/event.h>
 #include<error.h>
 #include<ucontext.h>
+#include<bitset>
+#include<thread>
+#include<mutex>
+#include<cassert>
+
 
 
 using namespace xiuye;
