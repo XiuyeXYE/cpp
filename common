@@ -39,6 +39,7 @@
 #include<sys/un.h>
 //#include<sys/event.h>
 #include<error.h>
+#include<ucontext.h>
 
 
 using namespace xiuye;
