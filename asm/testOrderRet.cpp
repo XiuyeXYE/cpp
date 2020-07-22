@@ -76,7 +76,7 @@ void test_ret(){
     // as("jmpq *%0;"::"m"(curr_rip));
 
     // as("leave;retq;");//OK
-    //leave -> 恢复前一个函数的栈帧(栈底)地址,恢复esp的指向
+    //leave -> 恢复前一个函数的栈帧(栈底)地址,恢复rsp的指向
     as("movq %rbp,%rsp;popq %rbp;");
     //ret
     as("popq %rax;jmpq *%rax;"); //perfect to 退出本函数
