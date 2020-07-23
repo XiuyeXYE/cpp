@@ -30,7 +30,7 @@ namespace xiuye{
     /**
     because of __FILE__ and __LINE__ is compiler's parameters in time!
     */
-    #define line(...) println(std::string("[") + __FILE__+":"+std::to_string(__LINE__)+"|"+__FUNCTION__+"|"+__DATE__+"/"+__TIME__+"]",__VA_ARGS__)
+    #define line(...) println(__VA_ARGS__,"\t",std::string("[") + __FILE__+":"+std::to_string(__LINE__)+"|"+__FUNCTION__+"|"+__DATE__+"/"+__TIME__+"]")
 
     #define info(...) line(__VA_ARGS__)
 
