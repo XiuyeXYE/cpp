@@ -178,18 +178,18 @@ class BST{
             release_nodes_from2(&root);
             println();
         }
-        
-        K min(node<K,V> *x){
+        //二叉搜索树最小节点在最左边
+        node<K,V>* min(node<K,V> *x){
             if(x->get_left()==nullptr){
-                return x->get_key();
+                return x;
             }
             return min(x->get_left());
         }
-
-        K max(node<K,V> *x){
+        //二叉搜索树最大节点在最右边
+        node<K,V>* max(node<K,V> *x){
 
             if(x->get_right() == nullptr){
-                return x->get_key();
+                return x;
             }
             return max(x->get_right());
 
@@ -244,6 +244,60 @@ class BST{
             }
         }
 
+        //删除最小节点
+        node<K,V> *delete_min(node<K,V>* x){
+            //recursive ending condition
+            if(x->get_left()==nullptr){
+                return x->get_right();
+            }
+            //recursive core
+            x->set_left(delete_min(x->get_left()));
+            x->set_n(size(x->get_left())+size(x->get_right())+1);
+            return x;
+
+        }
+
+        //删除节点为key的节点
+        //删除节点,并把右子树最小节点填到该节点原来的位置!
+        //这就是二叉搜索树 删除 节点的方法
+        node<K,V> * remove(node<K,V> *x,K key){
+            
+            if(x==nullptr){
+                return nullptr;
+            }
+
+
+            if(x->get_key()>key){
+                //重新设置 left
+                x->set_left(remove(x->get_left(),key));
+            }
+            else if(x->get_key()<key){
+                // 重新设置right
+                x->set_right(remove(x->get_right(),key));
+            }
+            else{
+                if(x->get_right()==nullptr){
+                    return x->get_left();
+                }
+                if(x->get_left()==nullptr){
+                    return x->get_right();
+                }
+                //删除操作
+                node<K,V> *t = x;
+                x = min(t->get_right());
+                x->set_right(delete_min(t->get_right()));
+                x->set_left(t->get_left());
+            }
+
+
+            x->set_n(size(x->get_left())+size(x->get_right())+1);
+            //为啥返回 x ,就是给上层赋值
+            //删除(1)赋值(2),分了两步走,递归顺序(2)(1)
+            return x;
+
+        }
+
+
     public:
         BST():root(nullptr){}
         int size(){
@@ -280,12 +334,12 @@ class BST{
 
         //最小值key
         K min(){
-            return min(root);
+            return min(root)->get_key();
         }
 
         //最大值key
         K max(){
-            return max(root);
+            return max(root)->get_key();
         }
 
         K floor(K key){
@@ -299,6 +353,17 @@ class BST{
         int rank(K key){
             return rank(root,key);
         }
+
+        void delete_min(){
+            root = delete_min(root);
+        }
+
+        void remove(K key){
+            root = remove(root,key);
+        }
+
+        
+
 
     public:
         //清理node
@@ -353,11 +418,28 @@ int main(){
     log("rank",binarytree.rank(2.5));
     log("rank",binarytree.rank(1));
 
+    //delete key 2
+    binarytree.remove(2);
+
+   
+
+
     binarytree.clear();
 
 
-
-
+    //test many data
+    srand(time(0));
+    for(int i=0;i<100;i++){
+        int r = rand()%10000;
+        log("rand:",r);
+        binarytree.put(r,i);
+    }
+    log("preorder:");
+    binarytree.travel_preorder();
+    log("inorder:");
+    binarytree.trave_inorder();
+    log("postorder:");
+    binarytree.trave_postorder();
 
     // if((bool)nullptr){
     //     log("nullptr");
