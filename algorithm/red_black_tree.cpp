@@ -21,7 +21,7 @@ struct node{
 template<class K,class V>
 class RB_BST{
 
-
+        node<K,V> root;
 
         bool is_red(node<K,V> *x){
             if(x == nullptr)return false;
@@ -70,10 +70,45 @@ class RB_BST{
             x->right->color = BLACK;
         }
 
-
+        void put(K key,V val){
+            root = put(root,key,val);
+            root->color = BLACK;
+        }
 
     public:
 
+        node<K,V> put(node<K,V> *h,K key,V val){
+            if(h == nullptr){
+                return new node<K,V>(key,val,1,RED);
+            }
+            if(h->key > key){
+                h->left = put(h->left,key,val);
+            }
+            else if(h->key<key){
+                h->right = put(h->right,key,val);
+            }
+            else{
+                h->val = val;
+            }
+
+            //左子树 红 , 右子树 黑
+            if(is_red(h->right)&&!is_red(h->left)){
+                h = rotate_left(h);
+            }
+            //左子树 红 , 左子树 子树 红
+            if(is_red(h->left)&&is_red(h->left->left)){
+                h = rotate_right(h);
+            }
+            //左子树 红 , 右子树 红
+            if(is_red(h->left)&&is_red(h->right)){
+                flip_color(h);
+            }
+
+            h->n = size(h->left)+size(h->right)+1;
+
+            return h;
+
+        }
 
 };
 
