@@ -131,7 +131,7 @@ int number_of_self_loops(graph &g){
         // log("v:",v);
         for(auto &w : *g[v]){
             // log(typeid(w).name(),typeid(v).name());
-            log(v,w);
+            // log(v,w);
             if(v == w)count++;
         }
     }
@@ -148,7 +148,7 @@ class depth_first_search{
         marked[v] = true;
         counter++;
         for(auto &w:*g[v]){
-            log(w);
+            // log(w);
             if(!marked[w])dfs(g,w);
         }
     }
@@ -263,7 +263,7 @@ class bread_first_paths{
         while(!q.empty()){
             int v = q.front();//不删除元素
             q.pop();//删除头部元素
-            log("v:",v);
+            // log("v:",v);
             for(auto &w:*g[v]){
                 if(!marked[w]){
                     edge_to[w] = v;
@@ -313,6 +313,145 @@ class bread_first_paths{
 };
 
 
+class cc{//连通分量 // 连通子图
+
+    bool *marked;
+    int *id;
+    int count;
+
+    void dfs(graph &g,int v){
+        marked[v] = true;
+        id[v] = count;//连通分量的id
+        for(int &w:*g[v]){
+            if(!marked[w]){
+                dfs(g,w);
+            }
+        }
+    }
+
+    public:
+        cc(graph &g):count(0){//别忘初始化成员变量,否则对结果有影响
+            marked = new bool[g.get_v()]{};
+            id = new int[g.get_v()]{};
+            //利用深度优先去寻找连通子图
+            for(int s=0;s<g.get_v();s++){
+                if(!marked[s]){
+                    dfs(g,s);
+                    count ++;//用于连通分量的id
+                }
+            }
+
+        }
+
+        bool connected(int v,int w){
+            return id[v] == id[w]; 
+        }
+
+        int identity(int v){
+            return id[v];
+        }
+
+        int total(){
+            return count;
+        }
+
+        virtual ~cc(){
+            delete []marked;
+            marked = nullptr;
+            delete []id;
+            id = nullptr;
+        }
+
+
+
+};
+
+
+//graph 是无环图?
+//深度优先处理
+class cycle{
+    bool *marked;
+    bool has_cycled;
+    void dfs(graph&g,int v,int u){
+        marked[v] = true;
+        for(int &w:*g[v]){
+            // log(w,v,u);
+            if(!marked[w]){
+                dfs(g,w,v);
+            }
+            else if(w!=u){//为什么不等就为true呢?
+                log(w,u);
+                has_cycled = true;
+            }
+        }
+    }
+    public:
+        cycle(graph &g):has_cycled(false){
+            marked = new bool[g.get_v()]{};
+            for(int s=0;s<g.get_v();s++){
+                if(!marked[s]){
+                    dfs(g,s,s);
+                }
+            }
+        }
+
+        bool has_cycle(){
+            return has_cycled;
+        }
+
+        virtual ~cycle(){
+            delete []marked;
+            marked = nullptr;
+        }
+};
+
+//二分图 双色 端点颜色不同
+class two_color{
+
+    bool *marked;
+    bool *color;
+    bool is_two_color;
+
+    void dfs(graph &g,int v){
+        marked[v] = true;
+        for(int &w:*g[v]){
+            if(!marked[w]){
+                color[w] = !color[v];
+                dfs(g,w);
+            }
+            else if(color[w] == color[v]){//边的两个端点颜色相等,则不是二分图?
+                is_two_color = false;
+            }
+        }
+    }
+
+    public:
+
+        two_color(graph &g){
+            marked = new bool[g.get_v()]{};
+            color = new bool[g.get_v()]{};
+            for(int s=0;s<g.get_v();s++){
+                if(!marked[s]){
+                    dfs(g,s);
+                }
+            }
+
+        }
+
+        bool is_pipartite(){
+            return is_two_color;
+        }
+
+
+        virtual ~two_color(){
+            delete []marked;
+            marked = nullptr;
+            delete []color;
+            color = nullptr;
+        }
+
+};
+
 // #define fmt(arg...) print(123##arg)
 
 // #define fk(...) lk(0,##__VA_ARGS__,65)
@@ -343,11 +482,11 @@ A &f(A &b){
 
 int main(){
 
-    #ifdef __VA_ARGS__
-        log("has va args");
-    #endif  
+    // #ifdef __VA_ARGS__
+    //     log("has va args");
+    // #endif  
 
-    ifstream reader("BST.cpp",ios::in);
+    ifstream reader("graph.txt",ios::in);
 
     log(reader.is_open());
     if(reader.is_open()){
@@ -366,16 +505,16 @@ int main(){
 
     reader.close();
 
-    std::string text = "Quick brown fox.";
-    std::regex ws_re("\\s+"); // whitespace
-    std::vector<std::string> v(std::sregex_token_iterator(text.begin(), text.end(), ws_re, -1), 
-        std::sregex_token_iterator());
-    for(auto& s: v)
-        std::cout << s <<"\n";
+    // std::string text = "Quick brown fox.";
+    // std::regex ws_re("\\s+"); // whitespace
+    // std::vector<std::string> v(std::sregex_token_iterator(text.begin(), text.end(), ws_re, -1), 
+    //     std::sregex_token_iterator());
+    // for(auto& s: v)
+    //     std::cout << s <<"\n";
 
-    A a1;
-    auto c = f(a1);
-    log(typeid(c).name());
+    // A a1;
+    // auto c = f(a1);
+    // log(typeid(c).name());
 
     // test for reading 
     ifstream in("graph.txt");
@@ -416,7 +555,53 @@ int main(){
     }
     println();
 
+    //使用深度优先搜索 寻找 连通分量
 
+    cc dd(g);
+
+    log("连通分量数 count:",dd.total());
+
+    vector<int> ** coms = new vector<int>*[dd.total()];
+
+    for(int i=0;i<dd.total();i++){
+        coms[i] = new vector<int>();
+    }
+
+    for(int i=0;i<g.get_v();i++){
+        coms[dd.identity(i)]->push_back(i);//把同一个连通分量的顶点放在一起
+    }
+    println("连通分量(子图):");
+    for(int i=0;i<dd.total();i++){
+        print("连通分量",i,":");
+        for(auto &&w:*coms[i]){
+            print(w,' ');
+        }
+        println();
+    }
+
+
+    //释放内存
+    for(int i=0;i<dd.total();i++){
+        delete coms[i];
+        coms[i] = nullptr;
+    }
+
+    delete []coms;
+    coms = nullptr;
+
+    // log();
+
+    // int ab = 10;
+    // const int bc = ab;
+    // int hh[bc];//OK
+    // int kk[ab];//OK
+
+    cycle cyc(g);
+    log("有环:",cyc.has_cycle());
+
+    two_color tc(g);
+
+    log("二分图:",tc.is_pipartite());
 
     return 0;
 }
