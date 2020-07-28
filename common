@@ -51,6 +51,7 @@
 #include<regex>
 #include<queue>
 #include<stack>
+#include<array>
 
 //coroutines
 #include"xylib/include/aco.h"

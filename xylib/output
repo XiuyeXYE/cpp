@@ -52,6 +52,8 @@ namespace xiuye{
         //println(prefix,args...);
     //}
 
+    #define piling() log("");
+
 }
 
 #endif
