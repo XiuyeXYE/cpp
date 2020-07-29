@@ -37,8 +37,13 @@ class digraph{
         digraph reverse(){
             digraph r(v);
             for(int i=0;i<v;i++){
-                for(auto &w:(*this)[v]){
-                    r.add_edge(w,v);
+                // piling();
+                // log(typeid((*this)[v]).name());
+                
+                for(auto &w:(*this)[i]){//array index is 'i' !!! not v!!!
+                    // piling();
+                    // log(w,i);//array index is 'i' !!! not v!!!
+                    r.add_edge(w,i);//array index is 'i' !!! not v!!!
                 }
                 
             }
@@ -173,13 +178,17 @@ class depth_first_order{
     void dfs(digraph&g,int v){
         pre.push(v);
         marked[v] = true;
+        // piling();
         for(auto &w:g[v]){
+            // log(w,v,marked[w]);
             // piling();//打桩 仅仅用于输出,发现问题
             if(!marked[w]){
+                // piling();
                 dfs(g,w);
             }
-
+            // piling();
         }
+        // piling();
         post.push(v);
         reverse_post.push(v);
     }
@@ -239,6 +248,68 @@ class topological{
         }
 
 
+
+};
+
+
+//求强连通分量
+class kosaraju_cc{
+
+    bool *marked;
+    int *id;
+    int count;
+
+    void dfs(digraph &g,int v){
+        marked[v] = true;
+        id[v] = count;
+        for(int &w:g[v]){
+            // piling();
+            if(!marked[v]){
+                dfs(g,w);
+            }
+        }
+    }
+
+    public:
+        kosaraju_cc(digraph&g){
+            marked = new bool[g.get_v()]{};
+            id = new int[g.get_v()]{};
+            // piling();
+            digraph r = g.reverse();
+            // piling();
+            depth_first_order order(r);//?
+            // piling();
+            stack<int> st = order.order_reverse_post();
+            for(auto i=0;i<st.size();i++){
+                int v = st.top();
+                st.pop();
+                // piling();
+                if(!marked[v]){
+                    dfs(g,v);
+                    count++;
+                }
+            }
+        }
+
+        bool strongly_connected(int v,int w){
+            return id[v] = id[w];
+        }
+
+        int kind_id(int v){
+            return id[v];
+        }
+
+        int total(){
+            return count;
+        }
+
+        virtual ~kosaraju_cc(){
+            delete []marked;
+            marked = nullptr;
+
+            delete []id;
+            id = nullptr;
+        }
 
 };
 
@@ -330,6 +401,32 @@ int main(){
 
     topological top(g);
     println("can 拓扑排序(有向无环图):",top.is_dag());
+
+    kosaraju_cc cc(g);
+    println("有向图强连通分量:");//算法输出有问题?
+    println("总个数:",cc.total());
+
+    //数组的下标索引不要搞错了否则问题大的很!
+    vector<vector<int>> components;
+
+    for(auto i=0;i<cc.total();i++){
+        components.push_back(vector<int>());
+    }
+
+    for(auto i=0;i<g.get_v();i++){
+        components[cc.kind_id(i)].push_back(i);
+    }
+
+    for(auto i=0;i<cc.total();i++){
+        print("强连通分量",i,":");
+        for(auto &w:components[i]){
+            print(w,' ');
+        }
+        println();
+    }
+
+
+
 
 
 
