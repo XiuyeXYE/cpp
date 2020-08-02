@@ -1,3 +1,7 @@
 [submodule "git"]
 	path = git
 	url = git@github.com:XiuyeXYE/git.git
+
+[submodule "libaco"]
+	path = coroutines/libaco
+	url = git@github.com:XiuyeXYE/libaco.git
