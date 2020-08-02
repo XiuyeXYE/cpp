@@ -5,3 +5,19 @@
 [submodule "libaco"]
 	path = coroutines/libaco
 	url = git@github.com:XiuyeXYE/libaco.git
+
+
+
+[submodule "libcopp"]
+	path = coroutines/libcopp
+	url = git@github.com:XiuyeXYE/libcopp.git
+
+[submodule "libco"]
+	path = coroutines/libco
+	url = git@github.com:XiuyeXYE/libco.git
+
+[submodule "NtyCo"]
+	path = coroutines/NtyCo
+	url = git@github.com:XiuyeXYE/NtyCo.git
+
+
