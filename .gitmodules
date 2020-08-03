@@ -28,3 +28,9 @@
 [submodule "coroutines/async-coroutine"]
 	path = coroutines/async-coroutine
 	url = git@github.com:XiuyeXYE/async-coroutine.git
+[submodule "openjdk8"]
+	path = openjdk8
+	url = git@github.com:XiuyeXYE/OpenJDK-Research.git
+[submodule "jdk"]
+	path = jdk
+	url = git@github.com:XiuyeXYE/jdk.git
