@@ -53,12 +53,15 @@
 #include<stack>
 #include<array>
 
+#define ZERO(T) static_cast<T>(0);
+
 //coroutines
 #include"xylib/include/aco.h"
 #include"xylib/include/aco_assert_override.h"
 
 #include"xylib/include/co_routine.h"
 #include"xylib/include/co_closure.h"
+
 
 
 
