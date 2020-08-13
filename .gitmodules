@@ -36,3 +36,10 @@
 [submodule "jdk"]
 	path = jdk
 	url = git@github.com:XiuyeXYE/jdk.git
+
+
+
+[submodule "cpbook-code"]
+	path = cpbook-code
+	url = git@github.com:XiuyeXYE/cpbook-code.git
+
