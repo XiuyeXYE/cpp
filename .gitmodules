@@ -46,3 +46,7 @@
 [submodule "minix"]
 	path = minix
 	url = git@github.com:XiuyeXYE/minix.git
+
+[submodule "xv6-public"]
+	path = OS/xv6-public
+	url = git@github.com:XiuyeXYE/xv6-public.git
