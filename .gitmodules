@@ -1,3 +1,8 @@
+
+[submodule "mini3d"]
+	path = 3D/mini3d
+	url = git@github.com:XiuyeXYE/mini3d.git
+
 [submodule "git"]
 	path = git
 	url = git@github.com:XiuyeXYE/git.git
