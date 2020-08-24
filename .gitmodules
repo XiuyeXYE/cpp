@@ -1,5 +1,5 @@
 
-[submodule "mini3d"]
+[submodule "3D/mini3d"]
 	path = 3D/mini3d
 	url = git@github.com:XiuyeXYE/mini3d.git
 
