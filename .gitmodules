@@ -1,4 +1,5 @@
 
+
 [submodule "3D/mini3d"]
 	path = 3D/mini3d
 	url = git@github.com:XiuyeXYE/mini3d.git
@@ -7,25 +8,25 @@
 	path = git
 	url = git@github.com:XiuyeXYE/git.git
 
-[submodule "libaco"]
+[submodule "coroutines/libaco"]
 	path = coroutines/libaco
 	url = git@github.com:XiuyeXYE/libaco.git
 
 
 
-[submodule "libcopp"]
+[submodule "coroutines/libcopp"]
 	path = coroutines/libcopp
 	url = git@github.com:XiuyeXYE/libcopp.git
 
-[submodule "libco"]
+[submodule "coroutines/libco"]
 	path = coroutines/libco
 	url = git@github.com:XiuyeXYE/libco.git
 
-[submodule "NtyCo"]
+[submodule "coroutines/NtyCo"]
 	path = coroutines/NtyCo
 	url = git@github.com:XiuyeXYE/NtyCo.git
 
-[submodule "coroutine"]
+[submodule "coroutines/coroutine"]
 	path = coroutines/coroutine
 	url = git@github.com:XiuyeXYE/coroutine.git
 
@@ -48,8 +49,8 @@
 	path = cpbook-code
 	url = git@github.com:XiuyeXYE/cpbook-code.git
 
-[submodule "minix"]
-	path = minix
+[submodule "OS/minix"]
+	path = OS/minix
 	url = git@github.com:XiuyeXYE/minix.git
 
 [submodule "xv6-public"]
