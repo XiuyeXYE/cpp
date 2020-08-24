@@ -1,5 +1,5 @@
 
-[submodule "mini3d"]
+[submodule "3D/mini3d"]
 	path = 3D/mini3d
 	url = git@github.com:XiuyeXYE/mini3d.git
 	branch = master
@@ -9,29 +9,29 @@
 	url = git@github.com:XiuyeXYE/git.git
 	branch = master
 
-[submodule "libaco"]
+[submodule "coroutines/libaco"]
 	path = coroutines/libaco
 	url = git@github.com:XiuyeXYE/libaco.git
 	branch = master
 
 
 
-[submodule "libcopp"]
+[submodule "coroutines/libcopp"]
 	path = coroutines/libcopp
 	url = git@github.com:XiuyeXYE/libcopp.git
 	branch = master
 
-[submodule "libco"]
+[submodule "coroutines/libco"]
 	path = coroutines/libco
 	url = git@github.com:XiuyeXYE/libco.git
 	branch = master
 
-[submodule "NtyCo"]
+[submodule "coroutines/NtyCo"]
 	path = coroutines/NtyCo
 	url = git@github.com:XiuyeXYE/NtyCo.git
 	branch = master
 
-[submodule "coroutine"]
+[submodule "coroutines/coroutine"]
 	path = coroutines/coroutine
 	url = git@github.com:XiuyeXYE/coroutine.git
 	branch = master
@@ -59,12 +59,15 @@
 	url = git@github.com:XiuyeXYE/cpbook-code.git
 	branch = master
 
-[submodule "minix"]
-	path = minix
+[submodule "OS/minix"]
+	path = OS/minix
 	url = git@github.com:XiuyeXYE/minix.git
 	branch = master
 
-[submodule "xv6-public"]
+[submodule "OS/xv6-public"]
 	path = OS/xv6-public
 	url = git@github.com:XiuyeXYE/xv6-public.git
 	branch = master
+[submodule "OS/MIT6.828_OS"]
+	path = OS/MIT6.828_OS
+	url = git@github.com:SmallPond/MIT6.828_OS.git
